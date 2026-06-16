@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/nuevaRutinaFragment"
+        android:name="com.program.diefit.NuevaRutinaFragment"
+        android:label="Nueva rutina" />
+    <fragment
+        android:id="@+id/nuevoProductoFragment"
+        android:name="com.program.diefit.NuevoProductoFragment"
+        android:label="Nuevo producto" />
+    <fragment
+        android:id="@+id/historialRutinasFragment"
+        android:name="com.program.diefit.HistorialRutinasFragment"
+        android:label="Historial de rutinas" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.program.diefit.HomeFragment"
+        android:label="Inicio" />
+
+    <fragment
+        android:id="@+id/rutinasFragment"
+        android:name="com.program.diefit.RutinasFragment"
+        android:label="Rutinas">
+
+        <action
+            android:id="@+id/action_rutinas_to_nuevaRutina"
+            app:destination="@id/nuevaRutinaFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrarComidaFragment"
+        android:name="com.program.diefit.RegistrarComidaFragment"
+        android:label="Registrar comida" />
+
+    <fragment
+        android:id="@+id/nutricionFragment"
+        android:name="com.program.diefit.NutricionFragment"
+        android:label="Nutrición" />
+
+    <fragment
+        android:id="@+id/productosFragment"
+        android:name="com.program.diefit.ProductosFragment"
+        android:label="Productos">
+
+        <action
+            android:id="@+id/action_productos_to_nuevoProducto"
+            app:destination="@id/nuevoProductoFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.program.diefit.PerfilFragment"
+        android:label="Perfil" />
+
+</navigation>
