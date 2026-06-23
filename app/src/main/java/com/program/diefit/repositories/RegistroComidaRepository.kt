@@ -13,18 +13,16 @@ object RegistroComidaRepository {
         registroComidaDao = AppDatabase.getDatabase(context).registroComidaDao()
     }
 
-    fun cargarDesdeStorage() {
-        // Ya no es estrictamente necesario cargar listas en memoria con Room
-    }
+    private fun uid(): Int = UserRepository.usuarioActual?.id ?: 0
 
-    fun obtenerTodos(): List<RegistroComida> = registroComidaDao.getAll()
+    fun obtenerTodos(): List<RegistroComida> = registroComidaDao.getByUsuario(uid())
 
     fun obtenerPorFecha(fecha: String): List<RegistroComida> {
-        return registroComidaDao.getAll().filter { it.fecha == fecha }
+        return registroComidaDao.getByFecha(uid(), fecha)
     }
 
     fun agregar(registro: RegistroComida) {
-        registroComidaDao.insert(registro)
+        registroComidaDao.insert(registro.copy(usuarioId = uid()))
     }
 
     fun eliminar(registro: RegistroComida) {
@@ -32,6 +30,6 @@ object RegistroComidaRepository {
     }
 
     fun totalCaloriasPorFecha(fecha: String): Int {
-        return obtenerPorFecha(fecha).sumOf { it.calorias.toDoubleOrNull()?.toInt() ?: 0 }
+        return registroComidaDao.totalCalorias(uid(), fecha) ?: 0
     }
 }

@@ -70,6 +70,7 @@ class NuevaRutinaFragment : Fragment() {
         }
 
         val rutina = Rutina(
+            usuarioId = 0,
             nombre = nombreInput.text.toString().trim(),
             dias = ejerciciosInput.text.toString().ifBlank { "0" },
             duracion = duracionInput.text.toString().ifBlank { "0" },

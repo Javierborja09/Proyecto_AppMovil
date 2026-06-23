@@ -75,6 +75,7 @@ class NuevoProductoFragment : Fragment() {
 
     private fun guardarProducto() {
         val producto = Producto(
+            usuarioId = 0,
             nombre = nombreInput.text.toString().trim(),
             cantidad = cantidadInput.text.toString().ifBlank { "100" },
             unidad = unidadInput.text.toString().ifBlank { "g" },

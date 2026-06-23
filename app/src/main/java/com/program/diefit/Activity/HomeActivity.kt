@@ -36,10 +36,9 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_nutricion -> {
-                    showSubMenu(listOf("Registrar comida", "Macros")) {opcion ->
+                    showSubMenu(listOf("Registrar comida")) {opcion ->
                         when (opcion) {
                             "Registrar comida" -> navController.navigate(R.id.registrarComidaFragment)
-                            "Macros"    -> navController.navigate(R.id.rutinasFragment)
                         }
                     }
                     true

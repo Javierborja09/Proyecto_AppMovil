@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "rutinas")
 data class Rutina(
+    val usuarioId: Int,
     val nombre: String,
     val dias: String,
     val duracion: String,

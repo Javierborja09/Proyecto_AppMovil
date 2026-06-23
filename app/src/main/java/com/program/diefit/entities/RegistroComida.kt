@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class RegistroComida(
     @PrimaryKey
     var id: String = System.currentTimeMillis().toString(),
+    var usuarioId: Int,
     var fecha: String,
     var nombreProducto: String,
     var cantidad: String,
