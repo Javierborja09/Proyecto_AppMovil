@@ -22,6 +22,6 @@ class SplashActivity : AppCompatActivity() {
             }
             startActivity(Intent(this, destino))
             finish()
-        }, 1500) // 1.5 segundos
+        }, 1500)
     }
 }

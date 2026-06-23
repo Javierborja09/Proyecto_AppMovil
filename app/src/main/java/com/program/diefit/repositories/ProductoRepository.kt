@@ -13,35 +13,35 @@ object ProductoRepository {
         productoDao = AppDatabase.getDatabase(context).productoDao()
     }
 
+    private fun uid(): Int = UserRepository.usuarioActual?.id ?: 0
+
     fun cargarDesdeStorage() {
-        val productos = productoDao.getAll()
+        val uid = uid()
+        val productos = productoDao.getByUsuario(uid)
         if (productos.isEmpty()) {
             val iniciales = listOf(
-                Producto("Pechuga de pollo", "100", "g", "165", "31", "0", "3.6"),
-                Producto("Arroz blanco", "100", "g", "130", "2.7", "28", "0.3")
+                Producto(uid, "Pechuga de pollo", "100", "g", "165", "31", "0", "3.6"),
+                Producto(uid, "Arroz blanco", "100", "g", "130", "2.7", "28", "0.3")
             )
             productoDao.insertAll(iniciales)
         }
     }
 
-    fun obtenerTodos(): List<Producto> {
-        return productoDao.getAll()
-    }
+    fun obtenerTodos(): List<Producto> = productoDao.getByUsuario(uid())
 
     fun buscar(query: String): List<Producto> {
-        val productos = productoDao.getAll()
+        val productos = productoDao.getByUsuario(uid())
         if (query.isBlank()) return productos
         return productos.filter { it.nombre.contains(query, ignoreCase = true) }
     }
 
     fun agregar(producto: Producto) {
-        productoDao.insert(producto)
+        productoDao.insert(producto.copy(usuarioId = uid()))
     }
 
     fun eliminar(producto: Producto) {
         productoDao.delete(producto)
     }
 
-    fun actualizar() {
-    }
+    fun actualizar() {}
 }

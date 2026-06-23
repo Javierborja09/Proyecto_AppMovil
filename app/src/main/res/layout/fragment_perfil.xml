@@ -27,15 +27,12 @@
                 app:cardBackgroundColor="#EADDFF"
                 app:cardElevation="0dp">
 
-                <TextView
-                    android:id="@+id/tvInitials"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="JD"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:textColor="#6750A4" />
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_person"
+                    app:tint="?attr/colorOnSecondaryContainer" />
 
             </com.google.android.material.card.MaterialCardView>
 

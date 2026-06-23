@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "78401761312",
+    "firebase_url": "https://diefit-10132-default-rtdb.firebaseio.com",
+    "project_id": "diefit-10132",
+    "storage_bucket": "diefit-10132.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78401761312:android:5a1b8d54f6de42a6ba8c45",
+        "android_client_info": {
+          "package_name": "com.program.diefit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78401761312-cjo0dr4tu118dbig56ih7p25l8lu69b1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.program.diefit",
+            "certificate_hash": "1cc3928346092f9bb1bf21a0609f2267d0160afb"
+          }
+        },
+        {
+          "client_id": "78401761312-v60trund6q5m972jf5425hkkdncqvc0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuSuFtNxdi6pjENPNJqyTor5JpBCG5CEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78401761312-v60trund6q5m972jf5425hkkdncqvc0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

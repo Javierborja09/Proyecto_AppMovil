@@ -15,6 +15,22 @@ object UserRepository {
         usuarioDao = AppDatabase.getDatabase(context).usuarioDao()
     }
 
+    fun loginOCrearConGoogle(email: String, nombre: String): Boolean {
+        var usuario = usuarioDao.getUsuarioByEmail(email)
+        if (usuario == null) {
+            usuario = Usuario(
+                nombre = nombre,
+                email = email,
+                password = ""
+            )
+            usuarioDao.insert(usuario)
+            usuario = usuarioDao.getUsuarioByEmail(email)
+        }
+        usuarioActual = usuario
+        usuario?.let { SessionStorage.guardarSesion(it.email) }
+        return usuario != null
+    }
+
     fun cargarDesdeStorage() {
         if (usuarioDao.getUsuarioByEmail("admin@diefit.com") == null) {
             usuarioDao.insert(Usuario("Admin", "admin@diefit.com", "123456"))

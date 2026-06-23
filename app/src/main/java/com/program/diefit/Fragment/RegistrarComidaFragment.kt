@@ -157,6 +157,7 @@ class RegistrarComidaFragment : Fragment() {
         val factor = (cantidadConsumida.toDoubleOrNull() ?: 0.0) / (producto.cantidad.toDoubleOrNull() ?: 1.0)
 
         val registro = RegistroComida(
+            usuarioId = 0,
             fecha = formatoFecha.format(fechaSeleccionada.time),
             nombreProducto = producto.nombre,
             cantidad = cantidadConsumida,

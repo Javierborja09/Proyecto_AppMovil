@@ -6,6 +6,7 @@ import com.program.diefit.data.SessionStorage
 class DiefitApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        AppProvider.init(this)
         SessionStorage.init(this)
 
         UserRepository.init(this)
