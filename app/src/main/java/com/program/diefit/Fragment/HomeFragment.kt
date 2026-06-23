@@ -1,4 +1,4 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.program.diefit.R
+import com.program.diefit.RegistroComidaRepository
+import com.program.diefit.UserRepository
 import com.program.diefit.services.GroqService
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

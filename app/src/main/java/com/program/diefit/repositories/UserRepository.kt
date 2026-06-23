@@ -1,45 +1,47 @@
 package com.program.diefit
 
+import android.content.Context
+import com.program.diefit.data.AppDatabase
+import com.program.diefit.data.UsuarioDao
+import com.program.diefit.data.SessionStorage
 import com.program.diefit.entities.Usuario
-
 
 object UserRepository {
 
-    private val usuarios = mutableListOf<Usuario>()
+    private lateinit var usuarioDao: UsuarioDao
     var usuarioActual: Usuario? = null
 
-    fun cargarDesdeStorage() {
-        usuarios.clear()
-        usuarios.addAll(UserStorage.cargarUsuarios())
+    fun init(context: Context) {
+        usuarioDao = AppDatabase.getDatabase(context).usuarioDao()
+    }
 
-        if (usuarios.none { it.email == "admin@diefit.com" }) {
-            usuarios.add(Usuario("Admin", "admin@diefit.com", "123456"))
-            UserStorage.guardarUsuarios(usuarios)
+    fun cargarDesdeStorage() {
+        if (usuarioDao.getUsuarioByEmail("admin@diefit.com") == null) {
+            usuarioDao.insert(Usuario("Admin", "admin@diefit.com", "123456"))
         }
 
-        val emailSesion = UserStorage.obtenerSesion()
+        val emailSesion = SessionStorage.obtenerSesion()
         if (emailSesion != null) {
-            usuarioActual = usuarios.find { it.email == emailSesion }
+            usuarioActual = usuarioDao.getUsuarioByEmail(emailSesion)
         }
     }
 
     fun registrar(nombre: String, email: String, password: String): Result {
-        if (usuarios.any { it.email == email }) {
+        if (usuarioDao.getUsuarioByEmail(email) != null) {
             return Result.ERROR_EMAIL_EXISTE
         }
         val nuevo = Usuario(nombre, email, password)
-        usuarios.add(nuevo)
+        usuarioDao.insert(nuevo)
         usuarioActual = nuevo
-        UserStorage.guardarUsuarios(usuarios)
-        UserStorage.guardarSesion(email)
+        SessionStorage.guardarSesion(email)
         return Result.EXITO
     }
 
     fun login(email: String, password: String): Boolean {
-        val user = usuarios.find { it.email == email && it.password == password }
-        return if (user != null) {
+        val user = usuarioDao.getUsuarioByEmail(email)
+        return if (user != null && user.password == password) {
             usuarioActual = user
-            UserStorage.guardarSesion(email)
+            SessionStorage.guardarSesion(email)
             true
         } else {
             false
@@ -47,16 +49,18 @@ object UserRepository {
     }
 
     fun buscarPorEmail(email: String): Usuario? {
-        return usuarios.find { it.email == email }
+        return usuarioDao.getUsuarioByEmail(email)
     }
 
     fun actualizarUsuarioActual() {
-        UserStorage.guardarUsuarios(usuarios)
+        usuarioActual?.let {
+            usuarioDao.insert(it)
+        }
     }
 
     fun cerrarSesion() {
         usuarioActual = null
-        UserStorage.cerrarSesion()
+        SessionStorage.cerrarSesion()
     }
 
     enum class Result {

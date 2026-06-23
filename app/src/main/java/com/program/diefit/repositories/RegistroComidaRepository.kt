@@ -1,30 +1,34 @@
 package com.program.diefit
 
+import android.content.Context
+import com.program.diefit.data.AppDatabase
+import com.program.diefit.data.RegistroComidaDao
 import com.program.diefit.entities.RegistroComida
 
 object RegistroComidaRepository {
 
-    private val registros = mutableListOf<RegistroComida>()
+    private lateinit var registroComidaDao: RegistroComidaDao
 
-    fun cargarDesdeStorage() {
-        registros.clear()
-        registros.addAll(RegistroComidaStorage.cargarRegistros())
+    fun init(context: Context) {
+        registroComidaDao = AppDatabase.getDatabase(context).registroComidaDao()
     }
 
-    fun obtenerTodos(): List<RegistroComida> = registros
+    fun cargarDesdeStorage() {
+        // Ya no es estrictamente necesario cargar listas en memoria con Room
+    }
+
+    fun obtenerTodos(): List<RegistroComida> = registroComidaDao.getAll()
 
     fun obtenerPorFecha(fecha: String): List<RegistroComida> {
-        return registros.filter { it.fecha == fecha }
+        return registroComidaDao.getAll().filter { it.fecha == fecha }
     }
 
     fun agregar(registro: RegistroComida) {
-        registros.add(registro)
-        RegistroComidaStorage.guardarRegistros(registros)
+        registroComidaDao.insert(registro)
     }
 
     fun eliminar(registro: RegistroComida) {
-        registros.remove(registro)
-        RegistroComidaStorage.guardarRegistros(registros)
+        registroComidaDao.delete(registro)
     }
 
     fun totalCaloriasPorFecha(fecha: String): Int {

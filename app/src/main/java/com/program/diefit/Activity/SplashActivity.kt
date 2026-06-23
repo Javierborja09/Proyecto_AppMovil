@@ -1,10 +1,12 @@
-package com.program.diefit
+package com.program.diefit.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.program.diefit.R
+import com.program.diefit.UserRepository
 
 class SplashActivity : AppCompatActivity() {
 

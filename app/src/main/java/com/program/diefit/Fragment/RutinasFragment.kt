@@ -1,6 +1,8 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.program.diefit.R
+import com.program.diefit.RegistroRutinaRepository
+import com.program.diefit.RutinaRepository
 import com.program.diefit.entities.Rutina
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -73,7 +78,7 @@ class RutinasFragment : Fragment() {
                 orientation = LinearLayout.HORIZONTAL
                 val pad = (16 * resources.displayMetrics.density).toInt()
                 setPadding(pad, pad, pad, pad)
-                gravity = android.view.Gravity.CENTER_VERTICAL
+                gravity = Gravity.CENTER_VERTICAL
             }
 
             val infoLayout = LinearLayout(requireContext()).apply {
@@ -84,11 +89,11 @@ class RutinasFragment : Fragment() {
             val tvNombre = TextView(requireContext()).apply {
                 text = rutina.nombre
                 textSize = 16f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                setTypeface(typeface, Typeface.BOLD)
             }
 
             val tvDetalle = TextView(requireContext()).apply {
-                text = "${rutina.ejercicios} ejercicios · ${rutina.duracion} min"
+                text = "${rutina.dias} ejercicios · ${rutina.duracion} min"
                 textSize = 13f
                 setPadding(0, 8, 0, 0)
             }

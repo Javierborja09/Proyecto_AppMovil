@@ -1,4 +1,4 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.program.diefit.Activity.MainActivity
+import com.program.diefit.R
+import com.program.diefit.UserRepository
 
 class PerfilFragment : Fragment() {
 

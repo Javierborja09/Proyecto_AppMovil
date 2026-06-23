@@ -1,10 +1,14 @@
-package com.program.diefit
+package com.program.diefit.Activity
 
 import android.os.Bundle
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.program.diefit.R
 
 class HomeActivity : AppCompatActivity() {
 
@@ -58,13 +62,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showSubMenu(opciones: List<String>, onSelect: (String) -> Unit) {
-        val dialog = com.google.android.material.bottomsheet.BottomSheetDialog(this)
-        val layout = android.widget.LinearLayout(this).apply {
-            orientation = android.widget.LinearLayout.VERTICAL
+        val dialog = BottomSheetDialog(this)
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
             setPadding(0, 16, 0, 32)
         }
         opciones.forEach { opcion ->
-            val item = android.widget.TextView(this).apply {
+            val item = TextView(this).apply {
                 text = opcion
                 textSize = 16f
                 setPadding(48, 32, 48, 32)

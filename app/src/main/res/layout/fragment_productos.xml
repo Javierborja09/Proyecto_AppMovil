@@ -36,8 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Buscar producto"
-            app:startIconDrawable="@drawable/ic_mail"
+            app:startIconDrawable="@drawable/products"
             style="@style/Widget.Material3.TextInputLayout.FilledBox">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/buscarInput"
                 android:layout_width="match_parent"
@@ -45,7 +46,6 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Contenedor dinámico de productos -->
         <LinearLayout
             android:id="@+id/contenedorProductos"
             android:layout_width="match_parent"

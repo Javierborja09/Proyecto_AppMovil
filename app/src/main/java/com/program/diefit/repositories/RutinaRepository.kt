@@ -1,35 +1,41 @@
 package com.program.diefit
 
+import android.content.Context
+import com.program.diefit.data.AppDatabase
+import com.program.diefit.data.RutinaDao
 import com.program.diefit.entities.Rutina
 
 object RutinaRepository {
 
-    private val rutinas = mutableListOf<Rutina>()
+    private lateinit var rutinaDao: RutinaDao
+
+    fun init(context: Context) {
+        rutinaDao = AppDatabase.getDatabase(context).rutinaDao()
+    }
 
     fun cargarDesdeStorage() {
-        rutinas.clear()
-        rutinas.addAll(RutinaStorage.cargarRutinas())
-
+        val rutinas = rutinaDao.getAll()
         if (rutinas.isEmpty()) {
-            rutinas.add(Rutina("Fuerza — Pecho y tríceps", "4", "45", "Fuerza"))
-            rutinas.add(Rutina("Cardio — Cinta y bicicleta", "2", "30", "Cardio"))
-            RutinaStorage.guardarRutinas(rutinas)
+            val iniciales = listOf(
+                Rutina("Fuerza — Pecho y tríceps", "4", "45", "Fuerza"),
+                Rutina("Cardio — Cinta y bicicleta", "2", "30", "Cardio")
+            )
+            rutinaDao.insertAll(iniciales)
         }
     }
 
-    fun obtenerTodos(): List<Rutina> = rutinas
+    fun obtenerTodos(): List<Rutina> = rutinaDao.getAll()
 
     fun agregar(rutina: Rutina) {
-        rutinas.add(rutina)
-        RutinaStorage.guardarRutinas(rutinas)
+        rutinaDao.insert(rutina)
     }
 
     fun eliminar(rutina: Rutina) {
-        rutinas.remove(rutina)
-        RutinaStorage.guardarRutinas(rutinas)
+        rutinaDao.delete(rutina)
     }
 
     fun actualizar() {
-        RutinaStorage.guardarRutinas(rutinas)
+        // En Room, las actualizaciones se manejan re-insertando el objeto con el mismo ID,
+        // por lo que este método puede quedar vacío si no se usa directamente para otra lógica.
     }
 }

@@ -5,24 +5,24 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/nuevaRutinaFragment"
-        android:name="com.program.diefit.NuevaRutinaFragment"
+        android:name="com.program.diefit.Fragment.NuevaRutinaFragment"
         android:label="Nueva rutina" />
     <fragment
         android:id="@+id/nuevoProductoFragment"
-        android:name="com.program.diefit.NuevoProductoFragment"
+        android:name="com.program.diefit.Fragment.NuevoProductoFragment"
         android:label="Nuevo producto" />
     <fragment
         android:id="@+id/historialRutinasFragment"
-        android:name="com.program.diefit.HistorialRutinasFragment"
+        android:name="com.program.diefit.Fragment.HistorialRutinasFragment"
         android:label="Historial de rutinas" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.program.diefit.HomeFragment"
+        android:name="com.program.diefit.Fragment.HomeFragment"
         android:label="Inicio" />
 
     <fragment
         android:id="@+id/rutinasFragment"
-        android:name="com.program.diefit.RutinasFragment"
+        android:name="com.program.diefit.Fragment.RutinasFragment"
         android:label="Rutinas">
 
         <action
@@ -33,17 +33,17 @@
 
     <fragment
         android:id="@+id/registrarComidaFragment"
-        android:name="com.program.diefit.RegistrarComidaFragment"
+        android:name="com.program.diefit.Fragment.RegistrarComidaFragment"
         android:label="Registrar comida" />
 
     <fragment
         android:id="@+id/nutricionFragment"
-        android:name="com.program.diefit.NutricionFragment"
+        android:name="com.program.diefit.Fragment.NutricionFragment"
         android:label="Nutrición" />
 
     <fragment
         android:id="@+id/productosFragment"
-        android:name="com.program.diefit.ProductosFragment"
+        android:name="com.program.diefit.Fragment.ProductosFragment"
         android:label="Productos">
 
         <action
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.program.diefit.PerfilFragment"
+        android:name="com.program.diefit.Fragment.PerfilFragment"
         android:label="Perfil" />
 
 </navigation>

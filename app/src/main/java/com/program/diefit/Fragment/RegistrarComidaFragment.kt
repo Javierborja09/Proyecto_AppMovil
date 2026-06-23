@@ -1,7 +1,10 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
 import android.app.DatePickerDialog
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +15,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
+import com.program.diefit.ProductoRepository
+import com.program.diefit.R
+import com.program.diefit.RegistroComidaRepository
 import com.program.diefit.entities.Producto
 import com.program.diefit.entities.RegistroComida
 import java.text.SimpleDateFormat
@@ -57,8 +63,8 @@ class RegistrarComidaFragment : Fragment() {
         renderProductosSeleccionables(ProductoRepository.obtenerTodos())
         renderRegistrosDia()
 
-        buscarProductoInput.addTextChangedListener(object : android.text.TextWatcher {
-            override fun afterTextChanged(s: android.text.Editable?) {
+        buscarProductoInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
                 renderProductosSeleccionables(ProductoRepository.buscar(s.toString()))
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -116,7 +122,7 @@ class RegistrarComidaFragment : Fragment() {
             val tvNombre = TextView(requireContext()).apply {
                 text = producto.nombre
                 textSize = 15f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                setTypeface(typeface, Typeface.BOLD)
             }
 
             val tvDetalle = TextView(requireContext()).apply {
@@ -205,7 +211,7 @@ class RegistrarComidaFragment : Fragment() {
             val tvNombre = TextView(requireContext()).apply {
                 text = registro.nombreProducto
                 textSize = 14f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                setTypeface(typeface, Typeface.BOLD)
             }
 
             val tvDetalle = TextView(requireContext()).apply {

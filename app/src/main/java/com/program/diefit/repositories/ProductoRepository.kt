@@ -1,41 +1,47 @@
 package com.program.diefit
 
-import com.program.diefit.data.ProductoStorage
+import android.content.Context
+import com.program.diefit.data.AppDatabase
+import com.program.diefit.data.ProductoDao
 import com.program.diefit.entities.Producto
 
 object ProductoRepository {
 
-    private val productos = mutableListOf<Producto>()
+    private lateinit var productoDao: ProductoDao
+
+    fun init(context: Context) {
+        productoDao = AppDatabase.getDatabase(context).productoDao()
+    }
 
     fun cargarDesdeStorage() {
-        productos.clear()
-        productos.addAll(ProductoStorage.cargarProductos())
-
+        val productos = productoDao.getAll()
         if (productos.isEmpty()) {
-            productos.add(Producto("Pechuga de pollo", "100", "g", "165", "31", "0", "3.6"))
-            productos.add(Producto("Arroz blanco", "100", "g", "130", "2.7", "28", "0.3"))
-            ProductoStorage.guardarProductos(productos)
+            val iniciales = listOf(
+                Producto("Pechuga de pollo", "100", "g", "165", "31", "0", "3.6"),
+                Producto("Arroz blanco", "100", "g", "130", "2.7", "28", "0.3")
+            )
+            productoDao.insertAll(iniciales)
         }
     }
 
-    fun obtenerTodos(): List<Producto> = productos
+    fun obtenerTodos(): List<Producto> {
+        return productoDao.getAll()
+    }
 
     fun buscar(query: String): List<Producto> {
+        val productos = productoDao.getAll()
         if (query.isBlank()) return productos
         return productos.filter { it.nombre.contains(query, ignoreCase = true) }
     }
 
     fun agregar(producto: Producto) {
-        productos.add(producto)
-        ProductoStorage.guardarProductos(productos)
+        productoDao.insert(producto)
     }
 
     fun eliminar(producto: Producto) {
-        productos.remove(producto)
-        ProductoStorage.guardarProductos(productos)
+        productoDao.delete(producto)
     }
 
     fun actualizar() {
-        ProductoStorage.guardarProductos(productos)
     }
 }

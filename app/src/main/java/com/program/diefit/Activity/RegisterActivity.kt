@@ -1,7 +1,8 @@
-package com.program.diefit
+package com.program.diefit.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.program.diefit.R
+import com.program.diefit.UserRepository
 import com.program.diefit.services.ReniecService
 import kotlinx.coroutines.launch
 
@@ -122,7 +125,7 @@ class RegisterActivity : AppCompatActivity() {
         if (email.isEmpty()) {
             emailLayout.error = "Ingresa tu correo"
             ok = false
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailLayout.error = "Correo no válido"
             ok = false
         }

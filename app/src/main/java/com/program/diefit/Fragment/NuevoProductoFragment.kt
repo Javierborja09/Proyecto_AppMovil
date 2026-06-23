@@ -1,4 +1,4 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.program.diefit.ProductoRepository
+import com.program.diefit.R
 import com.program.diefit.entities.Producto
 
 class NuevoProductoFragment : Fragment() {

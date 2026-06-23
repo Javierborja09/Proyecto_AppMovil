@@ -1,24 +1,23 @@
 package com.program.diefit
 
 import android.app.Application
-import com.program.diefit.data.ProductoStorage
+import com.program.diefit.data.SessionStorage
 
 class DiefitApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        UserStorage.init(this)
+        SessionStorage.init(this)
+
+        UserRepository.init(this)
         UserRepository.cargarDesdeStorage()
 
-        ProductoStorage.init(this)
+        ProductoRepository.init(this)
         ProductoRepository.cargarDesdeStorage()
 
-        RutinaStorage.init(this)
+        RutinaRepository.init(this)
         RutinaRepository.cargarDesdeStorage()
 
-        RegistroComidaStorage.init(this)
-        RegistroComidaRepository.cargarDesdeStorage()
-
-        RegistroRutinaStorage.init(this)
-        RegistroRutinaRepository.cargarDesdeStorage()
+        RegistroComidaRepository.init(this)
+        RegistroRutinaRepository.init(this)
     }
 }

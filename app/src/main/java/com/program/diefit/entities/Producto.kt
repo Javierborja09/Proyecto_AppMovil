@@ -1,11 +1,16 @@
 package com.program.diefit.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "productos")
 data class Producto(
-    var nombre: String,
-    var cantidad: String = "100",
-    var unidad: String = "g",
-    var calorias: String = "",
-    var proteinas: String = "",
-    var carbohidratos: String = "",
-    var grasas: String = ""
+    val nombre: String,
+    val cantidad: String,
+    val unidad: String,
+    val calorias: String,
+    val proteinas: String,
+    val carbohidratos: String,
+    val grasas: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0
 )

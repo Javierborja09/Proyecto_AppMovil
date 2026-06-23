@@ -1,5 +1,8 @@
 package com.program.diefit
 
+import android.content.Context
+import com.program.diefit.data.AppDatabase
+import com.program.diefit.data.RegistroRutinaDao
 import com.program.diefit.entities.RegistroRutina
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -7,46 +10,51 @@ import java.util.Locale
 
 object RegistroRutinaRepository {
 
-    private val registros = mutableListOf<RegistroRutina>()
+    private lateinit var registroRutinaDao: RegistroRutinaDao
     private val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-    fun cargarDesdeStorage() {
-        registros.clear()
-        registros.addAll(RegistroRutinaStorage.cargarRegistros())
+    fun init(context: Context) {
+        registroRutinaDao = AppDatabase.getDatabase(context).registroRutinaDao()
     }
 
-    fun obtenerTodos(): List<RegistroRutina> = registros.sortedByDescending {
-        formatoFecha.parse(it.fecha)?.time ?: 0L
+    fun cargarDesdeStorage() {
+        // Ya no es necesario con Room
+    }
+
+    fun obtenerTodos(): List<RegistroRutina> {
+        return registroRutinaDao.getAll().sortedByDescending {
+            formatoFecha.parse(it.fecha)?.time ?: 0L
+        }
     }
 
     fun obtenerPorFecha(fecha: String): List<RegistroRutina> {
-        return registros.filter { it.fecha == fecha }
+        return registroRutinaDao.getAll().filter { it.fecha == fecha }
     }
 
     fun estaMarcada(fecha: String, rutinaNombre: String): Boolean {
-        return registros.any { it.fecha == fecha && it.rutinaNombre == rutinaNombre }
+        return registroRutinaDao.getAll().any { it.fecha == fecha && it.rutinaNombre == rutinaNombre }
     }
 
     fun marcarCumplida(fecha: String, rutinaNombre: String) {
         if (!estaMarcada(fecha, rutinaNombre)) {
-            registros.add(RegistroRutina(fecha = fecha, rutinaNombre = rutinaNombre, cumplido = true))
-            RegistroRutinaStorage.guardarRegistros(registros)
+            registroRutinaDao.insert(
+                RegistroRutina(fecha = fecha, rutinaNombre = rutinaNombre, cumplido = true)
+            )
         }
     }
 
     fun desmarcar(fecha: String, rutinaNombre: String) {
-        registros.removeAll { it.fecha == fecha && it.rutinaNombre == rutinaNombre }
-        RegistroRutinaStorage.guardarRegistros(registros)
+        registroRutinaDao.deleteByFechaAndNombre(fecha, rutinaNombre)
     }
 
-    // Racha: días consecutivos hacia atrás desde hoy con al menos 1 rutina cumplida
     fun calcularRacha(): Int {
         var racha = 0
         val cal = Calendar.getInstance()
+        val todos = registroRutinaDao.getAll()
 
         while (true) {
             val fechaStr = formatoFecha.format(cal.time)
-            val hayCumplida = registros.any { it.fecha == fechaStr }
+            val hayCumplida = todos.any { it.fecha == fechaStr }
             if (hayCumplida) {
                 racha++
                 cal.add(Calendar.DAY_OF_MONTH, -1)
@@ -58,7 +66,7 @@ object RegistroRutinaRepository {
     }
 
     fun fechasConRegistro(): List<String> {
-        return registros.map { it.fecha }.distinct().sortedByDescending {
+        return registroRutinaDao.getAll().map { it.fecha }.distinct().sortedByDescending {
             formatoFecha.parse(it)?.time ?: 0L
         }
     }

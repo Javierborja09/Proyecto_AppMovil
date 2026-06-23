@@ -1,4 +1,4 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.program.diefit.R
+import com.program.diefit.RutinaRepository
 import com.program.diefit.entities.Rutina
 
 class NuevaRutinaFragment : Fragment() {
@@ -69,7 +71,7 @@ class NuevaRutinaFragment : Fragment() {
 
         val rutina = Rutina(
             nombre = nombreInput.text.toString().trim(),
-            ejercicios = ejerciciosInput.text.toString().ifBlank { "0" },
+            dias = ejerciciosInput.text.toString().ifBlank { "0" },
             duracion = duracionInput.text.toString().ifBlank { "0" },
             tipo = tipo
         )

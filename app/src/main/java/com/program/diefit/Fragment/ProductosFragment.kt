@@ -1,6 +1,9 @@
-package com.program.diefit
+package com.program.diefit.Fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
+import com.program.diefit.ProductoRepository
+import com.program.diefit.R
 import com.program.diefit.entities.Producto
 
 class ProductosFragment : Fragment() {
@@ -34,8 +39,8 @@ class ProductosFragment : Fragment() {
 
         renderProductos(ProductoRepository.obtenerTodos())
 
-        buscarInput.addTextChangedListener(object : android.text.TextWatcher {
-            override fun afterTextChanged(s: android.text.Editable?) {
+        buscarInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
                 renderProductos(ProductoRepository.buscar(s.toString()))
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -84,7 +89,7 @@ class ProductosFragment : Fragment() {
             val tvNombre = TextView(requireContext()).apply {
                 text = producto.nombre
                 textSize = 16f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                setTypeface(typeface, Typeface.BOLD)
             }
 
             val tvDetalle = TextView(requireContext()).apply {
