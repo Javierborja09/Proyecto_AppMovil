@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.program.diefit.services.GroqService
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -20,10 +23,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvName     = view.findViewById<TextView>(R.id.tvName)
-        val tvPeso     = view.findViewById<TextView>(R.id.tvPeso)
-        val tvMeta     = view.findViewById<TextView>(R.id.tvMeta)
-        val tvCalorias = view.findViewById<TextView>(R.id.tvCalorias)
+        val tvName       = view.findViewById<TextView>(R.id.tvName)
+        val tvPeso       = view.findViewById<TextView>(R.id.tvPeso)
+        val tvMeta       = view.findViewById<TextView>(R.id.tvMeta)
+        val tvCalorias   = view.findViewById<TextView>(R.id.tvCalorias)
+        val tvMotivacion = view.findViewById<TextView>(R.id.tvMotivacion)
 
         val user = UserRepository.usuarioActual
 
@@ -34,6 +38,12 @@ class HomeFragment : Fragment() {
         }
 
         cargarCaloriasHoy(tvCalorias)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            tvMotivacion.text = "Cargando tu motivación..."
+            val fraseIA = GroqService.obtenerMensajeMotivacional()
+            tvMotivacion.text = fraseIA
+        }
     }
 
     override fun onResume() {
