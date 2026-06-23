@@ -14,6 +14,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        UserRepository.cargarDesdeStorage()
+
         Handler(Looper.getMainLooper()).postDelayed({
             val destino = if (UserRepository.usuarioActual != null) {
                 HomeActivity::class.java

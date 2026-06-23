@@ -11,7 +11,7 @@ import java.net.URL
 
 object GroqService {
 
-    private const val API_KEY = "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"
+    private const val API_KEY = "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"
     private const val GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
     private const val TAG = "GroqService"
 
@@ -24,7 +24,6 @@ object GroqService {
             conn.setRequestProperty("Content-Type", "application/json")
             conn.doOutput = true
 
-            // Construcción del JSON de manera limpia y segura
             val jsonBody = JSONObject()
             jsonBody.put("model", "llama-3.1-8b-instant")
 
