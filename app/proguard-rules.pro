@@ -19,3 +19,16 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+
+# ====================================================================
+# Reglas específicas para Diefit (Room & Entidades)
+# ====================================================================
+
+# Conservar las clases de entidades para que R8/ProGuard no cambie sus nombres
+-keep class com.program.diefit.entities.** { *; }
+
+# Mantener la estructura interna de las consultas y la base de datos de Room
+-keep class * extends androidx.room.RoomDatabase
+-dontwarn androidx.room.**

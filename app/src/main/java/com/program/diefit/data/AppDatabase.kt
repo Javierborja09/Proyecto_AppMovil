@@ -36,7 +36,6 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "diefit_database"
                 )
-                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
                 INSTANCE = instance
